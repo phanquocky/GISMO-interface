@@ -1,0 +1,72 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Gismo Runner</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+        }
+
+        .container {
+            display: flex;
+            gap: 20px;
+        }
+
+        .form-container {
+            flex: 1;
+            max-width: 400px;
+        }
+
+        .output-container {
+            flex: 2;
+            background-color: #f5f5f5;
+            padding: 15px;
+            border-radius: 5px;
+            white-space: pre-wrap;
+            /* preserve line breaks */
+            overflow-x: auto;
+        }
+
+        h2 {
+            margin-top: 0;
+        }
+    </style>
+</head>
+
+<body>
+    <h1>Run Gismo1</h1>
+    <div class="container">
+        <!-- Left Column: Form -->
+        <div class="form-container">
+            <form method="POST" enctype="multipart/form-data">
+                {{ form.hidden_tag() }}
+                <p>
+                    {{ form.file.label }}<br>
+                    {{ form.file() }}
+                </p>
+                <p>
+                    {{ form.content.label }}<br>
+                    {{ form.content(rows=10, cols=40) }}
+                </p>
+                <p>{{ form.submit() }}</p>
+            </form>
+        </div>
+
+        <!-- Right Column: Output -->
+        <div class="output-container">
+            {% if output %}
+            <h2>CNF format output:</h2>
+            <pre>{{ output }}</pre>
+            <h2>Gismo output:</h2>
+            <pre>{{ gismo_output }}</pre>
+            {% else %}
+            <p>Output will appear here after running Gismo.</p>
+            {% endif %}
+        </div>
+    </div>
+</body>
+
+</html>

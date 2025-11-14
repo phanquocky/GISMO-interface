@@ -335,13 +335,13 @@ class IdentifyingCodesInstance:
         ]
         # TODO: check for existence of .git
         if PROJECT_DIR is not None:
-            res = subprocess.check_output('git --git-dir {PROJECT_DIR}/.git config --get remote.origin.url'.format(
+            res = subprocess.check_output('git --git-dir {PROJECT_DIR}/../.git config --get remote.origin.url'.format(
                 PROJECT_DIR=PROJECT_DIR), stderr=subprocess.STDOUT, shell=True)
             repo = res.decode()[:-1]
-            res = subprocess.check_output('git --git-dir {PROJECT_DIR}/.git branch'.format(
+            res = subprocess.check_output('git --git-dir {PROJECT_DIR}/../.git branch'.format(
                 PROJECT_DIR=PROJECT_DIR), stderr=subprocess.STDOUT, shell=True)
             branch = res.decode()[2:-1]
-            res = subprocess.check_output('git --git-dir {PROJECT_DIR}/.git log --format="%H" -n 1'.format(
+            res = subprocess.check_output('git --git-dir {PROJECT_DIR}/../.git log --format="%H" -n 1'.format(
                 PROJECT_DIR=PROJECT_DIR), stderr=subprocess.STDOUT, shell=True)
             commit = res.decode()[:-1]
             header += [

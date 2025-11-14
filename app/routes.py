@@ -19,7 +19,9 @@ def index():
         # 1. If file uploaded
         if form.file.data:
             file = form.file.data
-            filename = f"{secure_filename(file.filename)}_{datetime.datetime.now().strftime('%Y%m%d_%H%M%S')}"
+            filename = secure_filename(file.filename)
+            name, ext = os.path.splitext(filename)
+            filename = f"{name}_{datetime.datetime.now().strftime('%Y%m%d_%H%M%S')}.{ext.lstrip('.')}"
             input_path = os.path.join(current_app.config['UPLOAD_FOLDER'], filename)
             os.makedirs(current_app.config['UPLOAD_FOLDER'], exist_ok=True)
             file.save(input_path)
@@ -50,14 +52,6 @@ def index():
                                     check=True)
             output = result.stdout
 
-            input_path = os.path.join(current_app.config['UPLOAD_FOLDER'], f"k1/{output_file}")
-            print("Running gismo on:", input_path)
-            result = subprocess.run(['./gismo/build/gismo',input_path],
-                                    stdout=subprocess.PIPE,
-                                    stderr=subprocess.PIPE,
-                                    text=True,
-                                    check=True)
-            gismo_output = result.stdout
         except subprocess.CalledProcessError as e:
             output = f"Error running encode_network.py:\n{e.stderr}"
         

@@ -12,7 +12,6 @@
 
         .container {
             display: flex;
-            gap: 20px;
         }
 
         .form-container {
@@ -25,7 +24,7 @@
             background-color: #f5f5f5;
             padding: 15px;
             border-radius: 5px;
-            white-space: pre-wrap;
+            /* white-space: pre-wrap; */
             /* preserve line breaks */
             overflow-x: auto;
         }
@@ -51,17 +50,38 @@
                     {{ form.content.label }}<br>
                     {{ form.content(rows=10, cols=40) }}
                 </p>
+                <p>
+                    {{ form.k.label }}<br>
+                    {{ form.k(size=4) }}
+                </p>
                 <p>{{ form.submit() }}</p>
             </form>
         </div>
 
         <!-- Right Column: Output -->
         <div class="output-container">
-            {% if output %}
-            <h2>CNF format output:</h2>
-            <pre>{{ output }}</pre>
+            <!-- <pre>{{ output }}</pre> -->
+            {% if sensor %}
+            <!-- <h2>CNF format output:</h2> -->
+
+            {% if download_files %}
+            <h2>Available CNF files:</h2>
+            <ul>
+                {% for p in download_files %}
+                <li>
+                    {% set name = p.split('/')[-1] %}
+                    <a href="{{ url_for('main.download_cnf', filepath=p) }}" download class="download-btn">{{ name
+                        }}</a>
+                    <small>{{ p }}</small>
+                </li>
+                {% endfor %}
+            </ul>
+            {% else %}
+            <p>No CNF files available for download.</p>
+            {% endif %}
+
             <h2>Gismo output:</h2>
-            <pre>{{ gismo_output }}</pre>
+            <pre>{{ sensor }}</pre>
             {% else %}
             <p>Output will appear here after running Gismo.</p>
             {% endif %}

@@ -39,6 +39,7 @@ VOLUME ["/app"]
 # Environment variables
 ENV FLASK_APP=run.py
 ENV FLASK_ENV=development
+ENV FLASK_DEBUG=1
 ENV FLASK_RUN_HOST=0.0.0.0
 ENV PROJECT_DIR=/app/identifying-codes
 ENV PBLIB_DIR=/app/pblib/build

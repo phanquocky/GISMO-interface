@@ -8,6 +8,16 @@ set -e  # stop on first error (optional, remove if you want to continue even on 
 # check if cadical is already cloned
 if [ -d "/app/cadical" ]; then
     echo "cadical directory already exists. Skipping clone."
+
+    # setup crytpominisat
+    cd project
+    cd build
+    cmake -DCMAKE_BUILD_TYPE=Release ..
+    make -j$(nproc)
+    make install
+    ldconfig
+    cd /app
+
 else
     echo "Setting up cadical..."
     # remove any existing directories to avoid conflicts

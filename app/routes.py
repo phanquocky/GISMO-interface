@@ -92,7 +92,7 @@ def index():
                 sensor_S = parse_sensor_set_from_gismo_output(gismo_output, input_path)
                 # change sensor_S to string for display
                 print(f"Sensor set for k={k}: {sensor_S}")
-                sensor += f"\nGeneralised identifying code set (k = {k}): {sensor_S}\n"
+                sensor += f"\nGeneralised identifying code set (k = {k}) (length = {len(sensor_S)}): {sensor_S}\n"
             except subprocess.CalledProcessError as e:
                 gismo_output = f"Error running gismo:\n{e.stderr}"
             print("GiSMo Output: ", gismo_output)

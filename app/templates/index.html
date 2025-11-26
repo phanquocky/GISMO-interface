@@ -5,9 +5,27 @@
     <meta charset="UTF-8">
     <title>Gismo Runner</title>
     <style>
+        * {
+            box-sizing: border-box;
+        }
+
         body {
             font-family: Arial, sans-serif;
             margin: 20px;
+        }
+
+
+        pre,
+        code,
+        .output-text {
+            white-space: pre-wrap;
+            word-break: break-word;
+        }
+
+        *,
+        *::before,
+        *::after {
+            box-sizing: inherit;
         }
 
         .container {
@@ -26,7 +44,7 @@
             border-radius: 5px;
             /* white-space: pre-wrap; */
             /* preserve line breaks */
-            overflow-x: auto;
+            /* overflow-x: auto; */
         }
 
         h2 {
